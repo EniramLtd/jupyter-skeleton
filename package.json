@@ -1,0 +1,16 @@
+{
+  "name": "jupyter-skeleton",
+  "version": "0.0.1",
+  "description": "Jupyter extension for creating new notebooks from a skeleton",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akaihola/jupyter-skeleton.git"
+  },
+  "author": "Antti Kaihola",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/akaihola/jupyter-skeleton/issues"
+  },
+  "homepage": "https://github.com/akaihola/jupyter-skeleton#readme"
+}
