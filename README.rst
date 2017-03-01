@@ -9,12 +9,16 @@ notebook can be configured.
 Installation
 ============
 
+.. code-block:: bash
+
     pip install jupyter-skeleton
     jupyter nbextension install [--sys-prefix|--user] --py jupyter_skeleton
     jupyter nbextension enable [--sys-prefix|--user] --py jupyter_skeleton
 
-In your Jupyter configuration directory, edit or create the
-:file:`notebook.json` file and add the skeleton notebook path::
+In your Jupyter configuration directory, edit or create the ``notebook.json``
+file and add the skeleton notebook path:
+
+.. code-block:: json
 
     {
         "skeleton": "skeletons/notebook-skeleton.ipynb"
