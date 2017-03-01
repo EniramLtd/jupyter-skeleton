@@ -5,12 +5,12 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akaihola/jupyter-skeleton.git"
+    "url": "git+https://github.com/EniramLtd/jupyter-skeleton.git"
   },
   "author": "Antti Kaihola",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/akaihola/jupyter-skeleton/issues"
+    "url": "https://github.com/EniramLtd/jupyter-skeleton/issues"
   },
-  "homepage": "https://github.com/akaihola/jupyter-skeleton#readme"
+  "homepage": "https://github.com/EniramLtd/jupyter-skeleton#readme"
 }
