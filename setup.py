@@ -2,8 +2,9 @@
 
 from setuptools import setup
 import json
-
-npm_package = json.load(open('./package.json', 'r'))
+from pkg_resources import resource_string
+package_json = resource_string('jupyter_skeleton', 'package.json')
+npm_package = json.loads(package_json.decode('ascii'))
 setup(
       name=npm_package['name'],
       version=npm_package['version'],
@@ -12,5 +13,6 @@ setup(
       author_email='antti.kaihola@eniram.fi',
       url=npm_package['repository']['url'],
       packages=['jupyter_skeleton'],
-      include_package_data=True,
+      package_data={'jupyter_skeleton': ['package.json',
+                                         'amd/index.js']},
 )

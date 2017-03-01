@@ -1,0 +1,2 @@
+include jupyter_skeleton/package.json
+include jupyter_skeleton/amd/index.js
