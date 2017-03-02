@@ -15,23 +15,43 @@ define([
         contents.original_new_untitled = contents.new_untitled;
         contents.new_untitled = function(path, options) {
             console.info(path, options);
-            return Promise.all([cfg.load(), contents.original_new_untitled(path, options)])
-                .then(function(section_and_created) {
-                    var section = section_and_created[0];
-                    var created = section_and_created[1];
-                    var original = contents.get(
-                        section.skeleton, {type: 'notebook'}
-                    );
-                    return Promise.all([original, Promise.resolve(created.path)]);
+            if (options.type !== 'notebook') {
+                // Create text files and other content types without skeletons
+                return contents.original_new_untitled(path, options);
+            }
+            // Load the skeleton path from configuration and create a new
+            // untitled notebook
+            var untitled = contents.original_new_untitled(path, options);
+            return Promise.all([cfg.load(), untitled])
+                .then(function(promises) {
+                    // Load the skeleton notebook
+                    var skeleton_path = promises[0].skeleton;
+                    var untitled_metadata = promises[1];
+                    return Promise.all([
+                        contents.get(skeleton_path, {type: 'notebook'}),
+                        untitled_metadata
+                    ]);
                 })
-                .then(function(original_and_path) {
-                    var original = original_and_path[0];
-                    var new_path = original_and_path[1];
+                .then(function(promises) {
+                    // Load back the new untitled notebook, now with contents
+                    var skeleton = promises[0];
+                    var untitled_metadata = promises[1];
+                    return Promise.all([
+                        skeleton,
+                        contents.get(untitled_metadata.path, {type: 'notebook'})
+                    ])
+                })
+                .then(function(promises) {
+                    // Replace cells of the new untitled notebook with cells of
+                    // the skeleton notebook, and save it back
+                    var skeleton = promises[0];
+                    var untitled = promises[1];
+                    untitled.content.cells = skeleton.content.cells;
                     var save_options = {
-                        content: original.content,
-                        type: original.type
+                        content: untitled.content,
+                        type: 'notebook'
                     };
-                    return contents.save(new_path, save_options);
+                    return contents.save(untitled.path, save_options);
                 });
         };
     }
