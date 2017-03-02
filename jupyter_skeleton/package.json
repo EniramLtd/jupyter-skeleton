@@ -1,6 +1,6 @@
 {
   "name": "jupyter-skeleton",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Jupyter extension for creating new notebooks from a skeleton",
   "main": "lib/index.js",
   "repository": {
